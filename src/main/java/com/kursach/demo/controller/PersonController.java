@@ -10,6 +10,7 @@ import java.util.List;
 //import com.ssau.study.dto.CommitteeDTO;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/people")
 public class PersonController {
     @Autowired
