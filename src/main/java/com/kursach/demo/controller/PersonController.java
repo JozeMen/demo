@@ -31,14 +31,15 @@ public class PersonController {
         return personService.findAllPeople();
     }
     @DeleteMapping("/{id}")
-    public void deletePersonByName(@PathVariable Long id){
-        personService.deletePerson(id);
+    public void deletePersonById(@PathVariable Long id){
+        personService.deletePersonById(id);
     }
 
     @PutMapping("/{id}")
     public PersonDTO editPerson(@PathVariable Long id, @RequestBody PersonDTO personDTO) {
         return personService.editPerson(id, personDTO);
     }
+
 }
 
 

@@ -43,7 +43,7 @@ public class PersonService {
     public List<PersonDTO> findAllPeople() {
         return personTODTOList(personRepository.findAll());
     }
-    public void deletePerson(Long id) {
+    public void deletePersonById(Long id) {
         personRepository.deletePersonById(id);
     }
 

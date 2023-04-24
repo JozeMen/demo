@@ -43,6 +43,9 @@ public class PaymentService {
     public List<PaymentDTO> findAAllByPayerId(Long payerId) {
         return paymentTODTOList(paymentRepository.findAllByPaymentId(payerId));
     }
+    public List<PaymentDTO> showAllPAyments() {
+        return paymentTODTOList(paymentRepository.findAll());
+    }
 
     public void deletePayment(Long payerId) {
         paymentRepository.deletePaymentByPaymentId(payerId);

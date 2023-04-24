@@ -15,6 +15,11 @@ public class PaymentComtroller {
     @Autowired
     private PaymentService paymentService;
 
+    @GetMapping
+    public List<PaymentDTO> showAllPayments() {
+        return paymentService.showAllPAyments();
+    }
+
     @PostMapping
     public PaymentDTO createPayment(@RequestParam Long receiptId, @RequestParam Long payerId) {
         return paymentService.createPayment(receiptId, payerId);
