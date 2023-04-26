@@ -12,10 +12,12 @@ import java.util.List;
 @Getter
 @Setter
 public class CommitteeDTO {
+    private Long committeeId;
     private String name;
     private List<PersonDTO> personDTOList;
     public static CommitteeDTO fromEntity(Committee committee) {
         CommitteeDTO committeeDTO = new CommitteeDTO();
+        committeeDTO.committeeId = committee.getCommitteeId();
         committeeDTO.name = committee.getName();
         List<PersonDTO> personDTOList = new ArrayList<>();
         committeeDTO.setPersonDTOList(personDTOList);
@@ -29,6 +31,7 @@ public class CommitteeDTO {
     public static Committee fromDTO(CommitteeDTO committeeDTO) {
         Committee committee = new Committee();
         committee.setName(committeeDTO.getName());
+        committee.setCommitteeId(committeeDTO.committeeId);
         List<Person> people = new ArrayList<>();
         committee.setPeople(people);
         if (committeeDTO.getPersonDTOList() != null) {

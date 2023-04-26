@@ -1,6 +1,10 @@
 package com.kursach.demo.service;
 
+import com.kursach.demo.dto.CommitteeDTO;
 import com.kursach.demo.dto.ReceiptDTO;
+import com.kursach.demo.entity.Committee;
+import com.kursach.demo.entity.Payment;
+import com.kursach.demo.entity.Person;
 import com.kursach.demo.entity.Receipt;
 import com.kursach.demo.repository.ReceiptRepository;
 import jakarta.transaction.Transactional;
@@ -39,6 +43,23 @@ public class ReceiptService {
 
     public void deleteReceiptById(Long id) {
          receiptRepository.deleteReceiptByReceiptId(id);
+    }
+
+    public ReceiptDTO editReceipt(Long number, ReceiptDTO receiptDTO) {
+        Receipt receipt = ReceiptDTO.fromDTO(receiptDTO);
+        Receipt oldReceipt = receiptRepository.findReceiptByReceiptId(number);
+        if  (oldReceipt.getPaymentList() != null) {
+            List<Payment> paymentList = new ArrayList<>();
+            for (Payment payment : oldReceipt.getPaymentList()){
+                paymentList.add(payment);
+                payment.setReceipt(receipt);
+            }
+            receipt.setPaymentList(paymentList);
+        }
+        Receipt newCommittee = receiptRepository.save(receipt);
+        receiptRepository.deleteReceiptByReceiptId(number);
+        return ReceiptDTO.fromEntity(newCommittee);
+
     }
 
 

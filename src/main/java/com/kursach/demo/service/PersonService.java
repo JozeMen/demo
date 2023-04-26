@@ -1,8 +1,10 @@
 package com.kursach.demo.service;
 
 import com.kursach.demo.dto.PersonDTO;
+import com.kursach.demo.entity.Payment;
 import com.kursach.demo.entity.Person;
 import com.kursach.demo.repository.CommitteeRepository;
+import com.kursach.demo.repository.PaymentRepository;
 import com.kursach.demo.repository.PersonRepository;
 
 import jakarta.transaction.Transactional;
@@ -20,6 +22,9 @@ public class PersonService {
     private PersonRepository personRepository;
     @Autowired
     private CommitteeRepository committeeRepository;
+    @Autowired
+    private PaymentRepository paymentRepository;
+
 
     private List<PersonDTO> personTODTOList(List<Person> personList) {
         List<PersonDTO> personTODTOList = new ArrayList<>();
@@ -44,6 +49,7 @@ public class PersonService {
         return personTODTOList(personRepository.findAll());
     }
     public void deletePersonById(Long id) {
+
         personRepository.deletePersonById(id);
     }
 
@@ -52,6 +58,11 @@ public class PersonService {
         Person oldPerson = personRepository.findPersonById(id);
         if (oldPerson.getCommittee() != null) {
             person.setCommittee(oldPerson.getCommittee());
+        }
+        if (paymentRepository.findPaymentsByPaymentId(oldPerson.getId()) != null) {
+            for (Payment temp: paymentRepository.findPaymentsByPaymentId(oldPerson.getId())) {
+                temp.setPerson(person);
+            }
         }
         personRepository.deletePersonById(id);
         return PersonDTO.fromEntity(personRepository.save(person));

@@ -18,7 +18,6 @@ import java.util.List;
 public class PaymentService {
     @Autowired
     private PaymentRepository paymentRepository;
-
     @Autowired
     private ReceiptRepository receiptRepository;
     @Autowired

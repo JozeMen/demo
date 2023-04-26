@@ -22,6 +22,6 @@ public class Person {
     private String homeAddress;
     private String scienceGrade;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "committee_name", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    @JoinColumn(name = "committee_committeeId", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Committee committee;
 }

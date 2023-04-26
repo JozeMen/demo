@@ -16,7 +16,7 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
-    @PostMapping("/create/{comName}")
+    @PostMapping("/{comName}")
     public PersonDTO createPerson( @PathVariable String comName, @RequestBody PersonDTO personDTO) {
         return personService.createPerson(comName, personDTO);
     }

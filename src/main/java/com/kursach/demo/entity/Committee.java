@@ -18,11 +18,18 @@ import java.util.List;
 
 public class Committee {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long committeeId;
     @Column(unique = true, nullable = false)
     private String name;
 
 
     @OneToMany(mappedBy = "committee",cascade = CascadeType.ALL)
     private List<Person> people;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "company_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private Company company;
+
 
 }

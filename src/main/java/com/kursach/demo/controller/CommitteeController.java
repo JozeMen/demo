@@ -23,9 +23,9 @@ public class CommitteeController {
     public CommitteeDTO showCommitteeByName(@PathVariable String name) {
         return committeeService.showCommitteeByName(name);
     }
-    @PostMapping
-    public CommitteeDTO createCommittee(@RequestBody CommitteeDTO committeeDTO){
-        return committeeService.createCommittee(committeeDTO);
+    @PostMapping("/{name}")
+    public CommitteeDTO createCommittee(@PathVariable String name, @RequestBody CommitteeDTO committeeDTO){
+        return committeeService.createCommittee(name, committeeDTO);
     }
     @DeleteMapping("/{name}")
     public int deleteCommittee(@PathVariable String name) {
